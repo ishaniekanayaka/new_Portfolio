@@ -95,7 +95,7 @@ const Home = () => {
 
                 {/* Inner padding */}
                 <div
-                    className="absolute w-6/7 h-6/7 bg-indigo-500"
+                    className="absolute w-17/18 h-17/18 bg-white"
                     style={{
                       clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
                     }}
@@ -103,7 +103,7 @@ const Home = () => {
 
                 {/* Image container */}
                 <div
-                    className="absolute w-10/12 h-10/12 overflow-hidden"
+                    className="absolute w-15/16 h-15/16 overflow-hidden"
                     style={{
                       clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
                     }}
