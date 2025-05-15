@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-indigo-900 to-purple-900 text-white overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto px-4 py-25">
           {/* Main content container */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
 
@@ -130,7 +130,7 @@ const Home = () => {
           </div>
 
           {/* Stats or brief info */}
-          <div className={`mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+          <div className={`mt-16 grid py-1.5 grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
             {[
               { title: "Projects Completed", value: "25+" },
               { title: "Years Experience", value: "3+" },
