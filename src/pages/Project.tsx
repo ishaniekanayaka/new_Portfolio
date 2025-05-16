@@ -52,13 +52,13 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   return (
-      <section className="py-25 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-27 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-black to-gray-700">
         <div className="max-w-7xl mx-auto">
           <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-3xl font-bold text-center mb-12 text-gray-800"
+              className="text-3xl font-bold text-center mb-12 text-white"
           >
             My Projects
           </motion.h2>
