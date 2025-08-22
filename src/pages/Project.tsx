@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+import img1 from "../image/img_1.png";
+import img2 from "../image/img.png";
+import img3 from "../image/img_2.png";
+import img4 from "../image/img_3.png";
+
+
 interface Project {
   id: number;
   title: string;
@@ -17,7 +23,7 @@ const projects: Project[] = [
     title: "E-commerce Platform",
     description: "A full-stack e-commerce solution with React and Node.js",
     tags: ["JavaEE", "Jsp"],
-    image: "../../src/image/img_1.png",
+    image: img1,
     githubLink: "https://github.com/yourusername/ecommerce-platform",
     youtubeLink: "https://youtube.com/watch?v=example1"
   },
@@ -26,7 +32,7 @@ const projects: Project[] = [
     title: "Portfolio Website",
     description: "A responsive portfolio built with modern web technologies",
     tags: ["React", "Tailwind CSS", "Vite"],
-    image: "../../src/image/img.png",
+    image: img2,
     githubLink: "https://github.com/yourusername/portfolio-website"
   },
   {
@@ -34,7 +40,7 @@ const projects: Project[] = [
     title: "Culinary Academy",
     description: "A productivity app for organizing daily tasks",
     tags: ["Hibernate"],
-    image: "../../src/image/img_2.png",
+    image: img3,
     githubLink: "https://github.com/yourusername/task-management-app"
   },
   {
@@ -42,11 +48,12 @@ const projects: Project[] = [
     title: "MeetUpPro",
     description: "Real-time Online Appointment Platform with Spring",
     tags: ["JavaScript", "Html", "Spring"],
-    image: "../../src/image/img_3.png",
+    image: img4,
     githubLink: "https://github.com/yourusername/weather-dashboard",
-    youtubeLink: " https://youtu.be/gSRSuErWX0g "
+    youtubeLink: "https://youtu.be/gSRSuErWX0g"
   }
 ];
+
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
