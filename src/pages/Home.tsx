@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import profileImg from "../image/mb1.jpg";
 
 type RoleData = {
     title: string;
@@ -114,11 +115,11 @@ const Home = () => {
                                     clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
                                 }}
                             >
-                                <img
-                                    src="../../src/image/mb1.jpg"
-                                    alt="Ishani Ekanayake"
-                                    className="w-full h-full object-cover grayscale contrast-110"
-                                />
+                            <img
+                            src={profileImg}
+                            alt="Ishani Ekanayake"
+                            className="w-full h-full object-cover grayscale contrast-110"
+                            />
                             </div>
 
                             {/* Glow effect */}
