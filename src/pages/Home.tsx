@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Code, Palette, Server } from 'lucide-react';
-// Import your image - replace with your actual image path
+
 import profileImage from '../image/me2-removebg-preview.png'; // Adjust path as needed
-// Alternative import examples:
-// import profileImage from './images/ishani-profile.jpg';
-// import profileImage from '../images/my-photo.png';
+
 
 type RoleData = {
     title: string;
@@ -269,7 +267,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes spin-slow {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
