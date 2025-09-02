@@ -1,21 +1,34 @@
 import { useState, useEffect } from 'react';
-import { Github, Linkedin, Facebook, Instagram, MessageCircle } from 'lucide-react';
-import profileImg from "../image/mb1.jpg";
+import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Code, Palette, Server } from 'lucide-react';
+// Import your image - replace with your actual image path
+import profileImage from '../image/me2-removebg-preview.png';
 
 type RoleData = {
     title: string;
     colorClass: string;
+    icon: React.ReactNode;
 };
 
 const Home = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [currentRole, setCurrentRole] = useState<number>(0);
-    const [rotation, setRotation] = useState<number>(0);
 
     const roles: RoleData[] = [
-        { title: 'WEB DESIGNER', colorClass: 'text-pink-500' },
-        { title: 'FRONTEND DEVELOPER', colorClass: 'text-purple-500' },
-        { title: 'BACKEND DEVELOPER', colorClass: 'text-fuchsia-400' }
+        { 
+            title: 'WEB DESIGNER', 
+            colorClass: 'text-pink-500',
+            icon: <Palette className="inline-block mr-2" size={20} />
+        },
+        { 
+            title: 'FRONTEND DEVELOPER', 
+            colorClass: 'text-purple-500',
+            icon: <Code className="inline-block mr-2" size={20} />
+        },
+        { 
+            title: 'BACKEND DEVELOPER', 
+            colorClass: 'text-fuchsia-400',
+            icon: <Server className="inline-block mr-2" size={20} />
+        }
     ];
 
     useEffect(() => {
@@ -25,140 +38,270 @@ const Home = () => {
             setCurrentRole((prev) => (prev + 1) % roles.length);
         }, 3000);
 
-        const rotateInterval = setInterval(() => {
-            setRotation(prev => (prev + 1) % 360);
-        }, 50);
-
         return () => {
             clearInterval(roleInterval);
-            clearInterval(rotateInterval);
         };
     }, []);
 
+    const handleAboutClick = () => {
+        console.log('Navigate to about page');
+    };
+
+    const handleProjectsClick = () => {
+        console.log('Navigate to projects page');
+    };
+
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black to-gray-700 text-white overflow-hidden">
-            <div className="max-w-6xl mx-auto px-4 py-20">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 text-white overflow-hidden relative">
+            {/* Navigation Header */}
+            <nav className="relative z-20 flex justify-between items-center px-8 py-6">
+                <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    ISHA
+                </div>
+                <div className="flex space-x-8">
+                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Home</a>
+                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Projects</a>
+                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
+                </div>
+            </nav>
+
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+                <div className="absolute top-40 right-10 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+                <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
+            </div>
+
+            {/* Floating particles effect */}
+            <div className="absolute inset-0">
+                {[...Array(6)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-float"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 3}s`,
+                            animationDuration: `${3 + Math.random() * 4}s`
+                        }}
+                    />
+                ))}
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
                 {/* Main content container */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
 
                     {/* Left content - Text and details */}
-                    <div className={`w-full md:w-1/2 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
-                        <h1 className="text-3xl md:text-5xl font-bold mb-2">Hello...</h1>
-                        <h2 className="text-2xl md:text-4xl font-bold mb-2">
-                            I'M <span className="text-gray-500 font-extrabold">ISHANI EKANAYAKE</span>
-                        </h2>
-                        <div className="h-16 mb-6 relative">
-                            {roles.map((role, index) => (
-                                <h2
-                                    key={role.title}
-                                    className={`text-2xl md:text-3xl font-semibold ${role.colorClass} transition-all duration-500 absolute ${currentRole === index ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
-                                >
-                                    {role.title}
-                                </h2>
-                            ))}
-                        </div>
-                        <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                            A passionate web developer with a knack for turning ideas into
-                            interactive, engaging web experiences. With a blend of creativity
-                            and technical expertise, I specialize in crafting websites that
-                            not only look stunning but also perform seamlessly.
-                        </p>
-                        <button className="bg-white text-gray-900 hover:bg-gray-200 font-bold py-3 px-6 rounded-full transition-all transform hover:scale-105 shadow-lg">
-                            More About Me
-                        </button>
+                    <div className={`w-full lg:w-3/5 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
+                        <div className="relative">
+                            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                                Hello...
+                            </h1>
+                            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                                I'M <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">ISHANI EKANAYAKE</span>
+                            </h2>
+                            
+                            <div className="h-20 mb-8 relative">
+                                {roles.map((role, index) => (
+                                    <div
+                                        key={role.title}
+                                        className={`text-2xl md:text-4xl font-semibold ${role.colorClass} transition-all duration-500 absolute flex items-center ${currentRole === index ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+                                    >
+                                        {role.icon}
+                                        {role.title}
+                                    </div>
+                                ))}
+                            </div>
 
-                        {/* Social Media Icons */}
-                        <div className="flex space-x-6 mt-10">
-                            <a href="#" className="text-purple-500 hover:text-pink-300 transition-colors" aria-label="Instagram">
-                                <Instagram size={24} />
-                            </a>
-                            <a href="https://www.facebook.com/ishani.Ekanayaka/" className="text-pink-500 hover:text-white transition-colors" aria-label="Facebook">
-                                <Facebook size={24} />
-                            </a>
-                            <a href="https://github.com/ishaniekanayaka" className="text-blue-300 hover:text-white transition-colors" aria-label="GitHub">
-                                <Github size={24} />
-                            </a>
-                            <a href="https://www.linkedin.com/in/ishani-ekanayaka-78b6312b7/" className="text-emerald-300 hover:text-white transition-colors" aria-label="LinkedIn">
-                                <Linkedin size={24} />
-                            </a>
-                            <a href="https://wa.me/0720106953" className="text-fuchsia-400 hover:text-white transition-colors" aria-label="WhatsApp">
-                                <MessageCircle size={24} />
-                            </a>
+                            <p className="text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl">
+                                A passionate full-stack developer with expertise in modern web technologies. 
+                                I transform complex ideas into elegant, user-friendly digital solutions that 
+                                drive business growth and create exceptional user experiences.
+                            </p>
+
+                            {/* Action buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                                <button 
+                                    onClick={handleAboutClick}
+                                    className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-xl flex items-center justify-center"
+                                >
+                                    More About Me
+                                    <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                                </button>
+                                <button 
+                                    onClick={handleProjectsClick}
+                                    className="bg-transparent border-2 border-purple-500 text-purple-300 hover:bg-purple-500 hover:text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105"
+                                >
+                                    View My Work
+                                </button>
+                            </div>
+
+                            {/* Social Media Icons */}
+                            <div className="flex space-x-6">
+                                <a href="#" className="group text-purple-400 hover:text-pink-300 transition-all transform hover:scale-110" aria-label="Instagram">
+                                    <div className="p-3 rounded-full border border-purple-400 group-hover:border-pink-300 group-hover:shadow-lg transition-all">
+                                        <Instagram size={24} />
+                                    </div>
+                                </a>
+                                <a href="https://www.facebook.com/ishani.Ekanayaka/" className="group text-pink-400 hover:text-white transition-all transform hover:scale-110" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                                    <div className="p-3 rounded-full border border-pink-400 group-hover:border-white group-hover:shadow-lg transition-all">
+                                        <Facebook size={24} />
+                                    </div>
+                                </a>
+                                <a href="https://github.com/ishaniekanayaka" className="group text-blue-400 hover:text-white transition-all transform hover:scale-110" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                                    <div className="p-3 rounded-full border border-blue-400 group-hover:border-white group-hover:shadow-lg transition-all">
+                                        <Github size={24} />
+                                    </div>
+                                </a>
+                                <a href="https://www.linkedin.com/in/ishani-ekanayaka-78b6312b7/" className="group text-emerald-400 hover:text-white transition-all transform hover:scale-110" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                    <div className="p-3 rounded-full border border-emerald-400 group-hover:border-white group-hover:shadow-lg transition-all">
+                                        <Linkedin size={24} />
+                                    </div>
+                                </a>
+                                <a href="https://wa.me/0720106953" className="group text-fuchsia-400 hover:text-white transition-all transform hover:scale-110" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                                    <div className="p-3 rounded-full border border-fuchsia-400 group-hover:border-white group-hover:shadow-lg transition-all">
+                                        <MessageCircle size={24} />
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Right content - Animated rotating image */}
-                    <div className={`w-full md:w-1/3 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
-                        <div className="relative w-full aspect-square flex items-center justify-center">
-                            {/* Rotating border effect */}
-                            <div
-                                className="absolute w-full h-full"
-                                style={{
-                                    transform: `rotate(${rotation}deg)`,
-                                    background: 'linear-gradient(45deg, #f3f4f6, #9ca3af, #f3f4f6)',
-                                    clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
-                                }}
-                            ></div>
-
-                            {/* Inner padding */}
-                            <div
-                                className="absolute w-17/18 h-17/18 bg-gray-900"
-                                style={{
-                                    clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
-                                }}
-                            ></div>
-
+                    {/* Right content - Your Image with decorative elements */}
+                    <div className={`w-full lg:w-2/5 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
+                        <div className="relative w-full aspect-square max-w-lg mx-auto">
+                            {/* Outer rotating ring */}
+                            <div className="absolute inset-0 rounded-full border-4 border-gray-600 animate-spin-slow opacity-60"></div>
+                            
+                            {/* Middle ring */}
+                            <div className="absolute inset-4 rounded-full border-2 border-gray-500 animate-spin-reverse opacity-40"></div>
+                            
                             {/* Image container */}
-                            <div
-                                className="absolute w-15/16 h-15/16 overflow-hidden"
-                                style={{
-                                    clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
-                                }}
-                            >
-                            <img
-                            src={profileImg}
-                            alt="Ishani Ekanayake"
-                            className="w-full h-full object-cover grayscale contrast-110"
-                            />
+                            <div className="absolute inset-8 rounded-full overflow-hidden bg-gradient-to-br from-purple-900/50 to-pink-900/50 backdrop-blur-sm border-2 border-gray-600">
+                                <img 
+                                    src={profileImage}
+                                    alt="Ishani Ekanayake - Full Stack Developer" 
+                                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                        const target = e.target as HTMLImageElement;
+                                        target.style.display = 'none';
+                                        const parent = target.parentElement;
+                                        if (parent) {
+                                            parent.innerHTML = `
+                                                <div class="w-full h-full bg-gradient-to-br from-purple-900/80 to-pink-900/80 flex items-center justify-center">
+                                                    <div class="text-center">
+                                                        <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                            <span class="text-3xl font-bold text-white">IE</span>
+                                                        </div>
+                                                        <p class="text-gray-300 text-sm">Add Your Photo</p>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }
+                                    }}
+                                />
                             </div>
 
-                            {/* Glow effect */}
-                            <div
-                                className="absolute w-full h-full animate-pulse opacity-20"
-                                style={{
-                                    transform: `rotate(${-rotation * 0.5}deg)`,
-                                    background: 'linear-gradient(135deg, #f3f4f6, transparent, #9ca3af)',
-                                    clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
-                                    filter: 'blur(8px)',
-                                }}
-                            ></div>
+                            {/* Floating tech icons */}
+                            <div className="absolute inset-0">
+                                {[
+                                    { icon: '⚛️', position: 'top-4 left-4', delay: '0s' },
+                                    { icon: '🟨', position: 'top-4 right-4', delay: '1s' },
+                                    { icon: '🟢', position: 'bottom-4 left-4', delay: '2s' },
+                                    { icon: '🔷', position: 'bottom-4 right-4', delay: '0.5s' }
+                                ].map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute ${item.position} text-2xl animate-bounce opacity-70`}
+                                        style={{ animationDelay: item.delay }}
+                                    >
+                                        {item.icon}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Stats or brief info */}
-                <div className={`mt-16 flex justify-center items-center transition-all duration-1500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
+                {/* Enhanced Stats section */}
+                <div className={`mt-20 transition-all duration-1500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                         {[
-                            { title: "Projects Completed", value: "25+" },
-                            { title: "Years Experience", value: "2+" }
+                            { title: "Projects Completed", value: "25+", icon: <Code size={24} />, gradient: "from-purple-500 to-pink-500", bgColor: "bg-purple-600" },
+                            { title: "Years Experience", value: "1+", icon: <Palette size={24} />, gradient: "from-pink-500 to-red-500", bgColor: "bg-pink-600" },
+                            { title: "Technologies Mastered", value: "15+", icon: <Server size={24} />, gradient: "from-blue-500 to-purple-500", bgColor: "bg-blue-600" }
                         ].map((stat, index) => (
                             <div
                                 key={index}
-                                className="bg-gray-500  bg-opacity-50 border border-gray-700 rounded-lg p-6 text-center backdrop-blur-sm hover:bg-opacity-70 transition-all
-                hover:-translate-y-1 hover:shadow-lg"
+                                className="group relative bg-gray-800/60 backdrop-blur-lg border border-gray-600/50 rounded-2xl p-8 text-center hover:bg-gray-800/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                                 style={{
-                                    transitionDelay: `${index * 100}ms`,
-                                    transform: isVisible ? 'none' : 'translateY(20px)'
+                                    transitionDelay: `${index * 150}ms`,
                                 }}
                             >
-                                <h3 className="text-3xl font-bold text-black">{stat.value}</h3>
-                                <p className="text-lg text-black">{stat.title}</p>
+                                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${stat.bgColor} mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                                    <div className="text-white">
+                                        {stat.icon}
+                                    </div>
+                                </div>
+                                <h3 className="text-4xl font-bold text-white mb-2">{stat.value}</h3>
+                                <p className="text-lg text-gray-300 group-hover:text-white transition-colors">{stat.title}</p>
+                                
+                                {/* Subtle glow effect on hover */}
+                                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 blur-xl`}></div>
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* Call to action section */}
+                <div className={`mt-20 text-center transition-all duration-2000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-200">
+                        Ready to bring your ideas to life?
+                    </h3>
+                    <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                        Let's collaborate and create something amazing together. From concept to deployment, 
+                        I'll help you build digital experiences that make an impact.
+                    </p>
+                    <button 
+                        onClick={handleAboutClick}
+                        className="group bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-2xl flex items-center mx-auto"
+                    >
+                        Discover My Journey
+                        <ChevronRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" size={20} />
+                    </button>
+                </div>
             </div>
+
+            <style jsx>{`
+                @keyframes spin-slow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes spin-reverse {
+                    from { transform: rotate(360deg); }
+                    to { transform: rotate(0deg); }
+                }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-20px); }
+                }
+                .animate-spin-slow {
+                    animation: spin-slow 8s linear infinite;
+                }
+                .animate-spin-reverse {
+                    animation: spin-reverse 6s linear infinite;
+                }
+                .animate-float {
+                    animation: float 6s ease-in-out infinite;
+                }
+                .animation-delay-2000 {
+                    animation-delay: 2s;
+                }
+                .animation-delay-4000 {
+                    animation-delay: 4s;
+                }
+            `}</style>
         </div>
     );
 };
