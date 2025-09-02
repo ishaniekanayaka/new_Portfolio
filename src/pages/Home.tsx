@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Code, Palette, Server } from 'lucide-react';
 // Import your image - replace with your actual image path
-import profileImage from '../image/me2-removebg-preview.png';
+import profileImage from '../image/me2-removebg-preview.png'; // Adjust path as needed
+// Alternative import examples:
+// import profileImage from './images/ishani-profile.jpg';
+// import profileImage from '../images/my-photo.png';
 
 type RoleData = {
     title: string;
@@ -44,27 +47,17 @@ const Home = () => {
     }, []);
 
     const handleAboutClick = () => {
+        // Add your navigation logic here
         console.log('Navigate to about page');
     };
 
     const handleProjectsClick = () => {
+        // Add your navigation logic here
         console.log('Navigate to projects page');
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 text-white overflow-hidden relative">
-            {/* Navigation Header */}
-            <nav className="relative z-20 flex justify-between items-center px-8 py-6">
-                <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    ISHA
-                </div>
-                <div className="flex space-x-8">
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Home</a>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Projects</a>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
-                </div>
-            </nav>
-
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -88,7 +81,7 @@ const Home = () => {
                 ))}
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
                 {/* Main content container */}
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
 
@@ -168,22 +161,22 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Right content - Your Image with decorative elements */}
+                    {/* Right content - Your Image */}
                     <div className={`w-full lg:w-2/5 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
-                        <div className="relative w-full aspect-square max-w-lg mx-auto">
-                            {/* Outer rotating ring */}
-                            <div className="absolute inset-0 rounded-full border-4 border-gray-600 animate-spin-slow opacity-60"></div>
-                            
-                            {/* Middle ring */}
-                            <div className="absolute inset-4 rounded-full border-2 border-gray-500 animate-spin-reverse opacity-40"></div>
+                        <div className="relative w-full max-w-lg mx-auto">
+                            {/* Decorative rings around image */}
+                            <div className="absolute -inset-4 rounded-full border-4 border-gradient-to-r from-purple-500 to-pink-500 animate-spin-slow opacity-60"></div>
+                            <div className="absolute -inset-2 rounded-full border-2 border-gradient-to-r from-pink-500 to-blue-500 animate-spin-reverse opacity-40"></div>
                             
                             {/* Image container */}
-                            <div className="absolute inset-8 rounded-full overflow-hidden bg-gradient-to-br from-purple-900/50 to-pink-900/50 backdrop-blur-sm border-2 border-gray-600">
+                            <div className="relative aspect-square rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
+                                {/* Your imported image */}
                                 <img 
-                                    src={profileImage}
+                                    src={profileImage} 
                                     alt="Ishani Ekanayake - Full Stack Developer" 
                                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                                     onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                        // Fallback if image doesn't load
                                         const target = e.target as HTMLImageElement;
                                         target.style.display = 'none';
                                         const parent = target.parentElement;
@@ -194,16 +187,19 @@ const Home = () => {
                                                         <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-4 mx-auto">
                                                             <span class="text-3xl font-bold text-white">IE</span>
                                                         </div>
-                                                        <p class="text-gray-300 text-sm">Add Your Photo</p>
+                                                        <p class="text-gray-300 text-sm">Image Loading...</p>
                                                     </div>
                                                 </div>
                                             `;
                                         }
                                     }}
                                 />
+                                
+                                {/* Gradient overlay for professional effect */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-pink-900/20 pointer-events-none"></div>
                             </div>
 
-                            {/* Floating tech icons */}
+                            {/* Floating tech icons around image */}
                             <div className="absolute inset-0">
                                 {[
                                     { icon: '⚛️', position: 'top-4 left-4', delay: '0s' },
@@ -213,7 +209,7 @@ const Home = () => {
                                 ].map((item, index) => (
                                     <div
                                         key={index}
-                                        className={`absolute ${item.position} text-2xl animate-bounce opacity-70`}
+                                        className={`absolute ${item.position} text-2xl animate-bounce opacity-70 bg-gray-900/50 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm`}
                                         style={{ animationDelay: item.delay }}
                                     >
                                         {item.icon}
@@ -228,18 +224,18 @@ const Home = () => {
                 <div className={`mt-20 transition-all duration-1500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                         {[
-                            { title: "Projects Completed", value: "25+", icon: <Code size={24} />, gradient: "from-purple-500 to-pink-500", bgColor: "bg-purple-600" },
-                            { title: "Years Experience", value: "1+", icon: <Palette size={24} />, gradient: "from-pink-500 to-red-500", bgColor: "bg-pink-600" },
-                            { title: "Technologies Mastered", value: "15+", icon: <Server size={24} />, gradient: "from-blue-500 to-purple-500", bgColor: "bg-blue-600" }
+                            { title: "Projects Completed", value: "25+", icon: <Code size={24} />, gradient: "from-purple-500 to-pink-500" },
+                            { title: "Years Experience", value: "2+", icon: <Palette size={24} />, gradient: "from-pink-500 to-red-500" },
+                            { title: "Technologies Mastered", value: "15+", icon: <Server size={24} />, gradient: "from-blue-500 to-purple-500" }
                         ].map((stat, index) => (
                             <div
                                 key={index}
-                                className="group relative bg-gray-800/60 backdrop-blur-lg border border-gray-600/50 rounded-2xl p-8 text-center hover:bg-gray-800/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                                className="group relative bg-gray-800/40 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-8 text-center hover:bg-gray-800/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                                 style={{
                                     transitionDelay: `${index * 150}ms`,
                                 }}
                             >
-                                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${stat.bgColor} mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${stat.gradient} mb-4 group-hover:scale-110 transition-transform`}>
                                     <div className="text-white">
                                         {stat.icon}
                                     </div>
