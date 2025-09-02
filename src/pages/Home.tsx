@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Code, Palette, Server } from 'lucide-react';
 
 import profileImage from '../image/me2-removebg-preview.png'; // Adjust path as needed
+import { useNavigate } from 'react-router-dom';
 
 
 type RoleData = {
@@ -44,9 +45,10 @@ const Home = () => {
         };
     }, []);
 
-    const handleAboutClick = () => {
-        // Add your navigation logic here
-        console.log('Navigate to about page');
+    const navigate = useNavigate();
+
+     const handleAboutClick = () => {
+        navigate("/about"); // navigates to about.tsx
     };
 
     const handleProjectsClick = () => {
