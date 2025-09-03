@@ -4,7 +4,6 @@ import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Cod
 import profileImage from '../image/me2-removebg-preview.png'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
 
-
 type RoleData = {
     title: string;
     colorClass: string;
@@ -269,35 +268,38 @@ const Home = () => {
                 </div>
             </div>
 
-            <style>{`
-                @keyframes spin-slow {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                @keyframes spin-reverse {
-                    from { transform: rotate(360deg); }
-                    to { transform: rotate(0deg); }
-                }
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-20px); }
-                }
-                .animate-spin-slow {
-                    animation: spin-slow 8s linear infinite;
-                }
-                .animate-spin-reverse {
-                    animation: spin-reverse 6s linear infinite;
-                }
-                .animate-float {
-                    animation: float 6s ease-in-out infinite;
-                }
-                .animation-delay-2000 {
-                    animation-delay: 2s;
-                }
-                .animation-delay-4000 {
-                    animation-delay: 4s;
-                }
-            `}</style>
+            {/* Fixed style tag */}
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                    @keyframes spin-slow {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                    @keyframes spin-reverse {
+                        from { transform: rotate(360deg); }
+                        to { transform: rotate(0deg); }
+                    }
+                    @keyframes float {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(-20px); }
+                    }
+                    .animate-spin-slow {
+                        animation: spin-slow 8s linear infinite;
+                    }
+                    .animate-spin-reverse {
+                        animation: spin-reverse 6s linear infinite;
+                    }
+                    .animate-float {
+                        animation: float 6s ease-in-out infinite;
+                    }
+                    .animation-delay-2000 {
+                        animation-delay: 2s;
+                    }
+                    .animation-delay-4000 {
+                        animation-delay: 4s;
+                    }
+                `
+            }} />
         </div>
     );
 };
