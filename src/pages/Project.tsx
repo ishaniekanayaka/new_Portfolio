@@ -10,7 +10,7 @@ import meetUpProImg from './../image/meetUppro.png';
 import ecommerceImg from './../image/e-commerce.png';
 import chatAppImg from './../image/chatApp.png';
 import culinaryImg from './../image/culinary.png';
-import bookVerseImg from './../image/bookVerse.png';
+import bookVerseImg from './../image/bookClub.png';
 import petCareImg from './../image/petCareApp.jpg';
 import lendlyImg from './../image/loanApp.jpg';
 import calculatorImg from './../image/calculator.png';
