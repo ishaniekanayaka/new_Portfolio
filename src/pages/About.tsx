@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Download, GraduationCap, BookOpen, Calendar, MapPin, Phone, Mail, Heart, Code, Palette, Database, Smartphone, Cloud, Zap } from 'lucide-react';
 // Import your profile image
 import profileImage from './../image/me.png'; // Update path as needed
+import CV from './../assets/cv/ISHA EKANAYAKA.pdf';
+
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -221,7 +223,7 @@ const About = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
                 {/* Header Section */}
                 <div className={`text-center mb-12 md:mb-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-                    <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6">
+                    <h1 className="text-4xl md:text-7xl font-bold mt-[-90px] mb-4 md:mb-6">
                         ABOUT <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">ME</span>
                     </h1>
                     <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -285,16 +287,27 @@ const About = () => {
                                 I am passionate about coding and technology, with a keen interest in creating innovative software 
                                 solutions that make a meaningful impact.
                             </p>
-                            <p className="text-sm md:text-lg text-gray-400 leading-relaxed">
-                                Driven by curiosity and a desire to learn, I thrive on collaborating with others and tackling 
-                                challenging projects. My expertise spans across web and mobile development, with proficiency in 
-                                modern frameworks like React, React Native, and Node.js. I'm excited to connect with like-minded 
-                                individuals and explore opportunities to apply my skills in dynamic and impactful ways.
-                            </p>
-                            <button className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-full transition-all transform hover:scale-105 shadow-xl flex items-center text-sm md:text-base">
+                            
+                            {/* <button className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-full transition-all transform hover:scale-105 shadow-xl flex items-center text-sm md:text-base">
+                                <Download className="mr-2 group-hover:animate-bounce" size={18} />
+                                Download CV
+                            </button> */}
+                            <button
+                                onClick={() => {
+                                    const link = document.createElement('a');
+                                    link.href = CV;
+                                    link.download = 'IshaniCV.pdf'; // The downloaded file name
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }}
+                                className="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-full transition-all transform hover:scale-105 shadow-xl flex items-center text-sm md:text-base"
+                                >
                                 <Download className="mr-2 group-hover:animate-bounce" size={18} />
                                 Download CV
                             </button>
+
+
                         </div>
                     </div>
                 </div>
