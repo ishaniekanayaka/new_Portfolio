@@ -134,7 +134,7 @@ const Home = () => {
                                         <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </div>
                                 </a>
-                                <a href="https://www.facebook.com/ishani.Ekanayaka/" className="group text-pink-400 hover:text-white transition-all transform hover:scale-110" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.facebook.com/share/19jnHhCnTG/" className="group text-pink-400 hover:text-white transition-all transform hover:scale-110" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                                     <div className="p-2 sm:p-3 rounded-full border border-pink-400 group-hover:border-white group-hover:shadow-lg transition-all">
                                         <Facebook className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </div>
@@ -149,7 +149,7 @@ const Home = () => {
                                         <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </div>
                                 </a>
-                                <a href="https://wa.me/0720106953" className="group text-fuchsia-400 hover:text-white transition-all transform hover:scale-110" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                                <a href="https://wa.me/0767888979" className="group text-fuchsia-400 hover:text-white transition-all transform hover:scale-110" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                                     <div className="p-2 sm:p-3 rounded-full border border-fuchsia-400 group-hover:border-white group-hover:shadow-lg transition-all">
                                         <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </div>
