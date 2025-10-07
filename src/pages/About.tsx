@@ -4,10 +4,24 @@ import { Download, GraduationCap, BookOpen, Calendar, MapPin, Phone, Mail, Heart
 import profileImage from './../image/me.png'; // Update path as needed
 import CV from './../assets/cv/ISHA EKANAYAKA.pdf';
 
+// Import gallery images
+import collage1 from './../image/gallery/collage1.png';
+import collage2 from './../image/gallery/collage2.png';
+import img1 from './../image/gallery/1.jpg';
+import img2 from './../image/gallery/2.jpg';
+import img3 from './../image/gallery/3.jpg';
+import img4 from './../image/gallery/4.jpg';
+import img5 from './../image/gallery/5.jpg';
+import img6 from './../image/gallery/6.jpg';
+import img7 from './../image/gallery/7.jpg';
+import img8 from './../image/gallery/8.jpg';
+import img9 from './../image/gallery/9.jpg';
+
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [skillsVisible, setSkillsVisible] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     useEffect(() => {
         setIsVisible(true);
@@ -169,6 +183,20 @@ const About = () => {
         { name: "Database", icon: <Database size={24} />, color: "from-blue-600 to-indigo-600" },
         { name: "Design", icon: <Palette size={24} />, color: "from-pink-500 to-rose-500" },
         { name: "DevOps", icon: <Cloud size={24} />, color: "from-orange-500 to-amber-500" }
+    ];
+
+    const galleryImages = [
+        { url: collage2, alt: 'Project 1' },
+        { url: collage1, alt: 'Project 2' },
+        { url: img1, alt: 'Project 3' },
+        { url: img2, alt: 'Project 4' },
+        { url: img3, alt: 'Project 5' },
+        { url: img4, alt: 'Project 6' },
+        { url: img5, alt: 'Project 7' },
+        { url: img6, alt: 'Project 8' },
+        { url: img7, alt: 'Project 9' },
+        { url: img8, alt: 'Project 10' },
+        { url: img9, alt: 'Project 11' }
     ];
 
     const education = [
@@ -435,6 +463,51 @@ const About = () => {
                                 </div>
                             );
                         })}
+                    </div>
+                </div>
+
+                 {/* Gallery Section */}
+                <div className={`mb-12 md:mb-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                    <h2 className="text-3xl md:text-5xl font-bold text-center mb-10 md:mb-16">
+                        GA<span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">LLERY</span>
+                    </h2>
+
+                    <div className="flex items-center justify-center overflow-x-auto pb-8">
+                        <div className="flex gap-2 px-4" style={{ perspective: '1400px' }}>
+                            {galleryImages.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className="relative flex-shrink-0 cursor-pointer transition-all duration-1000 ease-out"
+                                    style={{
+                                        width: hoveredIndex === index ? '350px' : '80px',
+                                        height: '400px',
+                                        filter: hoveredIndex === null || hoveredIndex === index ? 'grayscale(0) brightness(1)' : 'grayscale(1) brightness(0.5)',
+                                        transform: hoveredIndex === index 
+                                            ? 'translateZ(100px) scale(1.05)' 
+                                            : hoveredIndex !== null && Math.abs(hoveredIndex - index) === 1
+                                            ? `translateZ(85px) rotateY(${hoveredIndex > index ? '35deg' : '-35deg'})`
+                                            : hoveredIndex !== null && Math.abs(hoveredIndex - index) === 2
+                                            ? `translateZ(56px) rotateY(${hoveredIndex > index ? '40deg' : '-40deg'})`
+                                            : 'translateZ(0)',
+                                        zIndex: hoveredIndex === index ? 100 : hoveredIndex !== null && Math.abs(hoveredIndex - index) <= 2 ? 50 - Math.abs(hoveredIndex - index) * 10 : 1
+                                    }}
+                                    onMouseEnter={() => setHoveredIndex(index)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
+                                >
+                                    <div className="relative w-full h-full rounded-lg overflow-hidden bg-gray-800 shadow-2xl">
+                                        <img
+                                            src={image.url}
+                                            alt={image.alt}
+                                            className="w-full h-full object-cover transition-transform duration-1000"
+                                            style={{
+                                                transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)'
+                                            }}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
