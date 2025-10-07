@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle, ChevronRight, Code, Palette, Server } from 'lucide-react';
-
-import profileImage from '../image/me2-removebg-preview.png'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
 
 type RoleData = {
@@ -13,6 +11,7 @@ type RoleData = {
 const Home = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [currentRole, setCurrentRole] = useState<number>(0);
+    const navigate = useNavigate();
 
     const roles: RoleData[] = [
         { 
@@ -44,15 +43,12 @@ const Home = () => {
         };
     }, []);
 
-    const navigate = useNavigate();
-
-     const handleAboutClick = () => {
-        navigate("/about"); // navigates to about.tsx
+    const handleAboutClick = () => {
+        navigate("/about");
     };
 
     const handleProjectsClick = () => {
-        // Add your navigation logic here
-        console.log('Navigate to projects page');
+        navigate("/projects");
     };
 
     return (
@@ -131,7 +127,7 @@ const Home = () => {
 
                             {/* Social Media Icons */}
                             <div className="flex space-x-6">
-                                <a href="#" className="group text-purple-400 hover:text-pink-300 transition-all transform hover:scale-110" aria-label="Instagram">
+                                <a href="https://www.instagram.com" className="group text-purple-400 hover:text-pink-300 transition-all transform hover:scale-110" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                                     <div className="p-3 rounded-full border border-purple-400 group-hover:border-pink-300 group-hover:shadow-lg transition-all">
                                         <Instagram size={24} />
                                     </div>
@@ -160,7 +156,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Right content - Your Image */}
+                    {/* Right content - Profile Image */}
                     <div className={`w-full lg:w-2/5 transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
                         <div className="relative w-full max-w-lg mx-auto">
                             {/* Decorative rings around image */}
@@ -169,30 +165,15 @@ const Home = () => {
                             
                             {/* Image container */}
                             <div className="relative aspect-square rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
-                                {/* Your imported image */}
-                                <img 
-                                    src={profileImage} 
-                                    alt="Ishani Ekanayake - Full Stack Developer" 
-                                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                                        // Fallback if image doesn't load
-                                        const target = e.target as HTMLImageElement;
-                                        target.style.display = 'none';
-                                        const parent = target.parentElement;
-                                        if (parent) {
-                                            parent.innerHTML = `
-                                                <div class="w-full h-full bg-gradient-to-br from-purple-900/80 to-pink-900/80 flex items-center justify-center">
-                                                    <div class="text-center">
-                                                        <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                            <span class="text-3xl font-bold text-white">IE</span>
-                                                        </div>
-                                                        <p class="text-gray-300 text-sm">Image Loading...</p>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }
-                                    }}
-                                />
+                                {/* Placeholder/Fallback */}
+                                <div className="w-full h-full bg-gradient-to-br from-purple-900/80 to-pink-900/80 flex items-center justify-center">
+                                    <div className="text-center">
+                                        <div className="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                            <span className="text-3xl font-bold text-white">IE</span>
+                                        </div>
+                                        <p className="text-gray-300 text-sm">Ishani Ekanayake</p>
+                                    </div>
+                                </div>
                                 
                                 {/* Gradient overlay for professional effect */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-pink-900/20 pointer-events-none"></div>

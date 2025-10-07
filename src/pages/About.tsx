@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { Download, GraduationCap, BookOpen, Calendar, MapPin, Phone, Mail, Heart, ExternalLink } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Download, GraduationCap, BookOpen, Calendar, MapPin, Phone, Mail, Heart } from 'lucide-react';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [skillsVisible, setSkillsVisible] = useState(false);
-    const [activeImage, setActiveImage] = useState<{ src: string; alt: string } | null>(null);
 
     useEffect(() => {
         setIsVisible(true);
@@ -92,21 +91,6 @@ const About = () => {
             icon: <BookOpen size={24} />,
             gradient: "from-blue-500 to-purple-500"
         }
-    ];
-
-    // Gallery images data
-    const galleryImages = [
-        { src: '/images/collage2.png', alt: 'Project Collage 1' },
-        { src: '/images/collage1.png', alt: 'Project Collage 2' },
-        { src: '/images/1.jpg', alt: 'Gallery Image 1' },
-        { src: '/images/2.jpg', alt: 'Gallery Image 2' },
-        { src: '/images/3.jpg', alt: 'Gallery Image 3' },
-        { src: '/images/4.jpg', alt: 'Gallery Image 4' },
-        { src: '/images/5.jpg', alt: 'Gallery Image 5' },
-        { src: '/images/6.jpg', alt: 'Gallery Image 6' },
-        { src: '/images/7.jpg', alt: 'Gallery Image 7' },
-        { src: '/images/8.jpg', alt: 'Gallery Image 8' },
-        { src: '/images/9.jpg', alt: 'Gallery Image 9' }
     ];
 
     return (
@@ -236,24 +220,13 @@ const About = () => {
                     </h2>
 
                     <div className="space-y-16">
-                        <SkillCategory title="Programming Languages" skills={programmingLanguages} delay={0} />
-                        <SkillCategory title="Frontend Development" skills={frontendSkills} delay={200} />
-                        <SkillCategory title="Mobile Development" skills={mobileSkills} delay={400} />
-                        <SkillCategory title="Backend Development" skills={backendSkills} delay={600} />
-                        <SkillCategory title="Database" skills={databaseSkills} delay={800} />
-                        <SkillCategory title="DevOps & Tools" skills={devopsTools} delay={1000} />
-                        <SkillCategory title="IDEs & Design Tools" skills={ideTools} delay={1200} />
-                    </div>
-                </div>
-
-                {/* Gallery Section */}
-                <div className={`mb-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                    <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-                        GA<span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">LLERY</span>
-                    </h2>
-
-                    <div className="gallery-wrapper">
-                        <PerspectiveGallery images={galleryImages} onImageClick={setActiveImage} />
+                        <SkillCategory title="Programming Languages" skills={programmingLanguages} delay={0} skillsVisible={skillsVisible} />
+                        <SkillCategory title="Frontend Development" skills={frontendSkills} delay={200} skillsVisible={skillsVisible} />
+                        <SkillCategory title="Mobile Development" skills={mobileSkills} delay={400} skillsVisible={skillsVisible} />
+                        <SkillCategory title="Backend Development" skills={backendSkills} delay={600} skillsVisible={skillsVisible} />
+                        <SkillCategory title="Database" skills={databaseSkills} delay={800} skillsVisible={skillsVisible} />
+                        <SkillCategory title="DevOps & Tools" skills={devopsTools} delay={1000} skillsVisible={skillsVisible} />
+                        <SkillCategory title="IDEs & Design Tools" skills={ideTools} delay={1200} skillsVisible={skillsVisible} />
                     </div>
                 </div>
 
@@ -313,154 +286,7 @@ const About = () => {
                 </div>
             </div>
 
-            {/* Image Modal */}
-            {activeImage && (
-                <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setActiveImage(null)}>
-                    <div className="max-w-4xl max-h-full">
-                        <img src={activeImage.src} alt={activeImage.alt} className="w-full h-auto object-contain" />
-                    </div>
-                    <button 
-                        className="absolute top-4 right-4 text-white bg-gray-800/50 rounded-full p-2 hover:bg-gray-700/50 transition-colors"
-                        onClick={() => setActiveImage(null)}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            )}
-
             <style>{`
-                .gallery-wrapper {
-                    font-family: 'Montserrat', sans-serif;
-                    background-color: transparent;
-                    z-index: 1000;
-                    box-sizing: border-box;
-                }
-
-                :root {
-                    --index: calc(1vw + 1vh);
-                    --transition: cubic-bezier(.1, .7, 0, 1);
-                }
-
-                .gallery h1{
-                    font-size: 48px;
-                    text-align: center;
-                    justify-content: center;
-                    color: white;
-                }
-
-                .gallery span{
-                    color: goldenrod;
-                }
-
-                .items {
-                    display: flex;
-                    gap: 0.4rem;
-                    perspective: calc(var(--index) * 35);
-                    flex-wrap: wrap;
-                    justify-content: center;
-                }
-
-                .item {
-                    width: calc(var(--index) * 4);
-                    height: calc(var(--index) * 15);
-                    background-color: #222;
-                    background-size: cover;
-                    background-position: center;
-                    cursor: pointer;
-                    filter: grayscale(1) brightness(.5);
-                    transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
-                    will-change: transform, filter, rotateY, width;
-                    position: relative;
-                    overflow: hidden;
-                    border-radius: 8px;
-                }
-
-                .item img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: transform 1s ease;
-                }
-
-                .item:hover img {
-                    transform: scale(1.1);
-                }
-
-                .item::before,
-                .item::after {
-                    content: '';
-                    position: absolute;
-                    height: 100%;
-                    width: 20px;
-                    right: calc(var(--index) * -1);
-                }
-
-                .item::after {
-                    left: calc(var(--index) * -1);
-                }
-
-                .items .item:hover {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 10));
-                }
-
-                /* Right */
-                .items .item:hover + * {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
-                    z-index: -1;
-                }
-
-                .items .item:hover + * + * {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
-                    z-index: -2;
-                }
-
-                .items .item:hover + * + * + * {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
-                    z-index: -3;
-                }
-
-                .items .item:hover + * + * + * + * {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
-                    z-index: -4;
-                }
-
-                /* Left */
-                .items .item:has( + :hover) {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
-                }
-
-                .items .item:has( + * + :hover) {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
-                }
-
-                .items .item:has( + * + * + :hover) {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
-                }
-
-                .items .item:has( + * + * + * + :hover) {
-                    filter: inherit;
-                    transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
-                }
-
-                .items .item:active,
-                .items .item:focus {
-                    width: 28vw;
-                    filter: inherit;
-                    z-index: 100;
-                    transform: translateZ(calc(var(--index) * 10));
-                    margin: 0 .45vw;
-                }
-
                 @keyframes spin-slow {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
@@ -484,61 +310,38 @@ const About = () => {
             `}</style>
         </div>
     );
-
-    function SkillCategory({ title, skills, delay = 0 }: { title: string; skills: { name: string; icon: React.ReactNode }[]; delay?: number }) {
-        return (
-            <div className={`mb-12 transition-all duration-1000 transform ${skillsVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${delay}ms` }}>
-                <h3 className="text-2xl font-bold mb-6 text-center">
-                    <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{title}</span>
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                    {skills.map((skill, index) => (
-                        <div
-                            key={skill.name}
-                            className="group bg-gray-800/40 backdrop-blur-lg border border-gray-700/50 rounded-xl p-4 text-center hover:bg-gray-800/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                            style={{ transitionDelay: `${delay + index * 50}ms` }}
-                        >
-                            <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                                {skill.icon}
-                            </div>
-                            <h4 className="text-sm font-semibold text-white">{skill.name}</h4>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-    }
 };
 
-// Perspective Gallery Component
-type PerspectiveGalleryProps = {
-    images: { src: string; alt: string }[];
-    onImageClick: (image: { src: string; alt: string }) => void;
+// Skill Category Component
+type SkillCategoryProps = {
+    title: string;
+    skills: { name: string; icon: string }[];
+    delay?: number;
+    skillsVisible: boolean;
 };
 
-const PerspectiveGallery = ({ images, onImageClick }: PerspectiveGalleryProps) => {
+function SkillCategory({ title, skills, delay = 0, skillsVisible }: SkillCategoryProps) {
     return (
-        <div className="wrapper" style={{ height: '60vh', marginTop: '-50px' }}>
-            <div className="items">
-                {images.map((image, index) => (
-                    <div 
-                        key={index}
-                        className="item"
-                        onClick={() => onImageClick(image)}
+        <div className={`mb-12 transition-all duration-1000 transform ${skillsVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${delay}ms` }}>
+            <h3 className="text-2xl font-bold mb-6 text-center">
+                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{title}</span>
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                {skills.map((skill, index) => (
+                    <div
+                        key={skill.name}
+                        className="group bg-gray-800/40 backdrop-blur-lg border border-gray-700/50 rounded-xl p-4 text-center hover:bg-gray-800/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                        style={{ transitionDelay: `${delay + index * 50}ms` }}
                     >
-                        <div className="w-full h-full bg-gradient-to-br from-purple-900/60 to-pink-900/60 flex items-center justify-center">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-4 mx-auto">
-                                    <span className="text-2xl">🖼️</span>
-                                </div>
-                                <p className="text-gray-300 text-sm">Image {index + 1}</p>
-                            </div>
+                        <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                            {skill.icon}
                         </div>
+                        <h4 className="text-sm font-semibold text-white">{skill.name}</h4>
                     </div>
                 ))}
             </div>
         </div>
     );
-};
+}
 
 export default About;
