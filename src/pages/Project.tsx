@@ -1,6 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Github, ExternalLink, Play, Code, Palette, Server, Database, Globe, Smartphone, Zap, Eye } from 'lucide-react';
 
+// Import local images
+import bookNestImg from './../image/bookClub.png';
+import smsImg from './../image/sms.png';
+import personalWebsiteImg from './../image/portfolio.png';
+import posImg from './../image/pos.png';
+import meetUpProImg from './../image/meetUppro.png';
+import ecommerceImg from './../image/e-commerce.png';
+import chatAppImg from './../image/chatApp.png';
+import culinaryImg from './../image/culinary.png';
+import bookVerseImg from './../image/bookVerse.png';
+import petCareImg from './../image/petCareApp.jpg';
+import lendlyImg from './../image/loanApp.jpg';
+import calculatorImg from './../image/calculator.png';
+
 interface Project {
   id: number;
   title: string;
@@ -21,95 +35,142 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // Sample projects - replace with your actual projects
   const projects: Project[] = [
+    // Backend
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce solution with modern payment integration",
-      longDescription: "A comprehensive e-commerce platform built with JavaEE and JSP, featuring user authentication, product management, shopping cart functionality, and secure payment processing. Includes admin dashboard for inventory management.",
-      tags: ["JavaEE", "JSP", "MySQL", "Bootstrap"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/ecommerce-platform",
-      youtubeLink: "https://youtube.com/watch?v=example1",
-      category: 'fullstack',
+      title: "BookNest",
+      description: "Book management platform with Spring Boot, MySQL, Hibernate",
+      longDescription: "A backend system for managing books, users, and library operations. Built with Spring Boot, MySQL, Hibernate, JWT for authentication, and Cloudinary for image storage.",
+      tags: ["Spring Boot", "MySQL", "Hibernate", "JWT", "Cloudinary"],
+      image: bookNestImg,
+      githubLink: "https://github.com/ishaniekanayaka/BookNest_Backend",
+      category: "backend",
       featured: true
     },
     {
       id: 2,
-      title: "Portfolio Website",
-      description: "A responsive portfolio built with modern web technologies",
-      longDescription: "A sleek, responsive portfolio website showcasing my skills and projects. Built with React, TypeScript, and Tailwind CSS, featuring smooth animations, dark mode support, and optimized performance.",
-      tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/portfolio-website",
-      liveLink: "https://ishani-portfolio.netlify.app",
-      category: 'frontend'
+      title: "SMS",
+      description: "Student Management System backend using NodeJS and MongoDB",
+      longDescription: "A backend service for managing students, courses, enrollments, and payments. Built with NodeJS, ExpressJS, and MongoDB.",
+      tags: ["NodeJS", "ExpressJS", "MongoDB"],
+      image: smsImg,
+      githubLink: "https://github.com/ishaniekanayaka/sms_BACKEND.git",
+      category: "backend"
     },
+
+    // Frontend
     {
       id: 3,
-      title: "Culinary Academy Management",
-      description: "A comprehensive management system for culinary institutions",
-      longDescription: "A robust management system for culinary academies featuring student enrollment, course management, instructor scheduling, and performance tracking. Built with Hibernate for efficient data management.",
-      tags: ["Java", "Hibernate", "Spring", "PostgreSQL"],
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/culinary-academy",
-      category: 'backend'
+      title: "Personal Website",
+      description: "ReactJS portfolio website",
+      longDescription: "A personal website showcasing projects, skills, and contact information. Built with ReactJS for dynamic rendering and smooth animations.",
+      tags: ["ReactJS", "Tailwind CSS", "JavaScript"],
+      image: personalWebsiteImg,
+      githubLink: "https://github.com/ishaniekanayaka/new_Portfolio",
+      liveLink: "https://new-portfolio-i2kp.vercel.app/",
+      category: "frontend"
     },
     {
       id: 4,
-      title: "MeetUpPro",
-      description: "Real-time online appointment platform with Spring framework",
-      longDescription: "A sophisticated appointment booking platform enabling real-time scheduling, notifications, and video meeting integration. Features admin dashboard, user management, and automated reminder systems.",
-      tags: ["Spring Boot", "JavaScript", "HTML5", "WebSocket"],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/meetuppro",
-      youtubeLink: "https://youtu.be/gSRSuErWX0g",
-      category: 'fullstack',
-      featured: true
+      title: "POS",
+      description: "Point of Sale system frontend with Bootstrap",
+      longDescription: "A user-friendly POS system interface built with HTML, CSS, JavaScript, and Bootstrap.",
+      tags: ["HTML", "CSS", "JS", "Bootstrap"],
+      image: posImg,
+      githubLink: "https://github.com/ishaniekanayaka/BootStrap_POS",
+      category: "frontend"
     },
+
+    {
+      id: 12,
+      title: "Calculator",
+      description: "Simple calculator built with HTML, CSS, and JavaScript",
+      longDescription: "A fully functional web-based calculator using HTML, CSS, and JavaScript. Supports basic arithmetic operations and a clean, responsive UI.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      image: calculatorImg, // make sure you import this image from your assets/images folder
+      githubLink: "https://github.com/ishaniekanayaka/Calculator_Assignment-10",
+      category: "frontend"
+    },
+
+
+    // Full Stack
     {
       id: 5,
-      title: "Task Management Dashboard",
-      description: "A collaborative project management tool with real-time updates",
-      longDescription: "An intuitive task management platform with drag-and-drop functionality, team collaboration features, real-time notifications, and progress tracking. Includes Gantt charts and time tracking capabilities.",
-      tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/task-manager",
-      liveLink: "https://taskpro-dashboard.netlify.app",
-      category: 'fullstack'
+      title: "MeetUpPro",
+      description: "Online appointment and meeting platform",
+      longDescription: "A full-stack web application for real-time scheduling, video meetings, and notifications. Backend built with Spring Boot and frontend with HTML, CSS, JS.",
+      tags: ["Spring Boot", "MySQL", "Hibernate", "JavaScript", "HTML", "CSS"],
+      image: meetUpProImg,
+      githubLink: "https://github.com/ishaniekanayaka/Online_Appointment_PlatForm",
+      liveLink: "https://youtu.be/gSRSuErWX0g",
+      category: "fullstack",
+      featured: true
     },
     {
       id: 6,
-      title: "Weather Analytics App",
-      description: "Mobile-responsive weather application with advanced analytics",
-      longDescription: "A comprehensive weather application providing detailed forecasts, historical data analysis, and personalized weather alerts. Features beautiful data visualizations and location-based services.",
-      tags: ["React Native", "API Integration", "Charts.js"],
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/weather-app",
-      category: 'mobile'
+      title: "E-commerce Platform",
+      description: "Full-stack e-commerce solution with modern payment integration",
+      longDescription: "A comprehensive e-commerce platform built with Java EE (JSP, Servlets) and MySQL. Features include product management, shopping cart, user authentication, and secure payment processing. Frontend uses HTML, CSS, Bootstrap, and JavaScript. Version control via Git.",
+      tags: ["Java EE", "JSP", "Servlets", "MySQL", "HTML", "CSS", "Bootstrap", "JavaScript", "Git"],
+      image: ecommerceImg,
+      githubLink: "https://github.com/ishaniekanayaka/E_Commerce_WebApplication",
+      liveLink: "https://youtu.be/FUHsiNYjnjE",
+      category: "fullstack"
     },
     {
       id: 7,
-      title: "Learning Management System",
-      description: "Educational platform with course management and student tracking",
-      longDescription: "A complete LMS solution for educational institutions featuring course creation, student enrollment, progress tracking, assignment submission, and interactive quizzes with automated grading.",
-      tags: ["Python", "Django", "PostgreSQL", "Redis"],
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/lms-platform",
-      category: 'backend',
-      featured: true
+      title: "Chat Application",
+      description: "Real-time chat with JavaFX and Sockets",
+      longDescription: "A desktop chat application built using Java and JavaFX. Supports real-time messaging using Socket programming.",
+      tags: ["Java", "JavaFX", "Socket"],
+      image: chatAppImg,
+      githubLink: "https://github.com/ishaniekanayaka/Live_Chat_Room.git",
+      category: "fullstack"
     },
     {
       id: 8,
-      title: "Social Media Analytics",
-      description: "Advanced analytics platform for social media performance tracking",
-      longDescription: "A powerful analytics platform that aggregates data from multiple social media platforms, providing insights through interactive dashboards, engagement metrics, and predictive analytics for content optimization.",
-      tags: ["Vue.js", "Python", "FastAPI", "Chart.js"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
-      githubLink: "https://github.com/ishaniekanayaka/social-analytics",
-      liveLink: "https://social-analytics-pro.netlify.app",
-      category: 'fullstack'
+      title: "Culinary",
+      description: "Culinary management system with Java and Hibernate",
+      longDescription: "A backend-focused system for managing culinary courses, students, and instructors. Built with Java, Hibernate, and MySQL.",
+      tags: ["Java", "Hibernate", "MySQL"],
+      image: culinaryImg,
+      githubLink: "https://github.com/ishaniekanayaka/Final",
+      category: "fullstack"
+    },
+    {
+      id: 9,
+      title: "BookVerse",
+      description: "MERN Stack application with ReactJS frontend",
+      longDescription: "A book management and review platform built with MongoDB, ExpressJS, ReactJS, and NodeJS.",
+      tags: ["MongoDB", "ExpressJS", "ReactJS", "NodeJS"],
+      image: bookVerseImg,
+      githubLink: "https://github.com/ishaniekanayaka/Book-Club-Backend",
+      liveLink: "https://www.linkedin.com/feed/update/urn:li:activity:7363508198370082817/?originTrackingId=Xh1AULfJQeWc%2B%2BO4MUO1fw%3D%3D",
+      category: "fullstack"
+    },
+
+    // Mobile
+    {
+      id: 10,
+      title: "Pet Care Tracker",
+      description: "React Native mobile app for pet care management",
+      longDescription: "A mobile app to track pet care routines, vaccinations, and appointments. Built with React Native, Expo, and Firebase.",
+      tags: ["React Native", "Expo", "Firebase"],
+      image: petCareImg,
+      githubLink: "https://github.com/ishaniekanayaka/pet-care-tracker",
+      liveLink: "https://youtu.be/hIrTED1YnL8",
+      category: "mobile"
+    },
+    {
+      id: 11,
+      title: "Lendly",
+      description: "Mobile loan application system with React Native",
+      longDescription: "A mobile-based loan application platform allowing users to apply for loans and bank managers to manage applications securely. Built with React Native, Expo, and Firebase.",
+      tags: ["React Native", "Expo", "Firebase"],
+      image: lendlyImg,
+      githubLink: "https://github.com/ishaniekanayaka/Lendly-Loan-App",
+      category: "mobile"
     }
   ];
 
